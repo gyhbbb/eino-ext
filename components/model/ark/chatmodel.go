@@ -210,7 +210,9 @@ func buildChatCompletionAPIChatModel(config *ChatModelConfig) *completionAPIChat
 	}
 
 	if config.UseBatchChat != nil && *config.UseBatchChat {
-		opts = nil
+		opts = []arkruntime.ConfigOption{
+			arkruntime.WithRegion(region),
+		}
 	}
 
 	if config.HTTPClient != nil {
