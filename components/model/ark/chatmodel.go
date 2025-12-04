@@ -143,6 +143,10 @@ type ChatModelConfig struct {
 	// Optional.
 	ReasoningEffort *model.ReasoningEffort `json:"reasoning_effort,omitempty"`
 
+	// UseBatchChat specifies whether to use the batch chat completion API. Only applies to non-streaming scenarios
+	// Optional. Default: false
+	UseBatchChat *bool `json:"use_batch_chat,omitempty"`
+
 	Cache *CacheConfig `json:"cache,omitempty"`
 }
 
@@ -233,6 +237,7 @@ func buildChatCompletionAPIChatModel(config *ChatModelConfig) *completionAPIChat
 		cache:            config.Cache,
 		serviceTier:      config.ServiceTier,
 		reasoningEffort:  config.ReasoningEffort,
+		useBatchChat:     config.UseBatchChat,
 	}
 
 	return cm

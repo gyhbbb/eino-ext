@@ -58,6 +58,7 @@ type completionAPIChatModel struct {
 	cache            *CacheConfig
 	serviceTier      *string
 	reasoningEffort  *model.ReasoningEffort
+	useBatchChat     *bool
 }
 
 type tool struct {
@@ -111,11 +112,11 @@ func (cm *completionAPIChatModel) Generate(ctx context.Context, in []*schema.Mes
 	}
 
 	ctx = callbacks.OnStart(ctx, &fmodel.CallbackInput{
-		Messages: in,
-		Tools:    tools, // join tool info from call options
+		Messages:   in,
+		Tools:      tools, // join tool info from call options
 		ToolChoice: options.ToolChoice,
-		Config:   reqConf,
-		Extra:    map[string]any{callbackExtraKeyThinking: specOptions.thinking},
+		Config:     reqConf,
+		Extra:      map[string]any{callbackExtraKeyThinking: specOptions.thinking},
 	})
 
 	defer func() {
@@ -128,6 +129,8 @@ func (cm *completionAPIChatModel) Generate(ctx context.Context, in []*schema.Mes
 	if specOptions.cache != nil && specOptions.cache.ContextID != nil {
 		resp, err = cm.client.CreateContextChatCompletion(ctx, *cm.convCompletionRequest(req, *specOptions.cache.ContextID),
 			arkruntime.WithCustomHeaders(specOptions.customHeaders))
+	} else if cm.useBatchChat != nil && *cm.useBatchChat {
+		resp, err = cm.client.CreateBatchChatCompletion(ctx, *req, arkruntime.WithCustomHeaders(specOptions.customHeaders))
 	} else {
 		resp, err = cm.client.CreateChatCompletion(ctx, *req, arkruntime.WithCustomHeaders(specOptions.customHeaders))
 	}
