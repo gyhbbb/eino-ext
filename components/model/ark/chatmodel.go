@@ -209,12 +209,6 @@ func buildChatCompletionAPIChatModel(config *ChatModelConfig) *completionAPIChat
 		arkruntime.WithTimeout(timeout),
 	}
 
-	if config.UseBatchChat != nil && *config.UseBatchChat {
-		opts = []arkruntime.ConfigOption{
-			arkruntime.WithRegion(region),
-		}
-	}
-
 	if config.HTTPClient != nil {
 		opts = append(opts, arkruntime.WithHTTPClient(config.HTTPClient))
 	}
