@@ -239,6 +239,7 @@ func buildChatCompletionAPIChatModel(config *ChatModelConfig) *completionAPIChat
 		serviceTier:      config.ServiceTier,
 		reasoningEffort:  config.ReasoningEffort,
 		useBatchChat:     config.UseBatchChat,
+		timeout:          timeout,
 	}
 
 	return cm
