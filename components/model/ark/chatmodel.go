@@ -143,7 +143,7 @@ type ChatModelConfig struct {
 	// Optional.
 	ReasoningEffort *model.ReasoningEffort `json:"reasoning_effort,omitempty"`
 
-	// UseBatchChat specifies whether to use the batch chat completion API. Only applies to non-streaming scenarios
+	// UseBatchChat specifies whether to use the batch chat completion API. Only applies to non-streaming scenarios and suggest setting a longer timeout period.
 	// Optional. Default: false
 	UseBatchChat *bool `json:"use_batch_chat,omitempty"`
 
