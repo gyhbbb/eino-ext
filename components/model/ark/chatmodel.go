@@ -156,7 +156,7 @@ type BatchChatConfig struct {
 	// For authentication details, see: https://www.volcengine.com/docs/82379/1399517?lang=en#01826852
 	EnableBatchChat bool `json:"enable_batch_chat,omitempty"`
 
-	// BatchChatTimeout specifies the timeout for the batch chat completion API. When using batch chat model must set a timeout period.
+	// BatchChatAsyncRetryTimeout specifies the timeout for the batch chat completion API. When using batch chat model must set a timeout period.
 	// Model will keep retrying until the timeout or the execution succeeds. It is using context timeout to implement the retry time limit.
 	// Attention: BatchChatAsyncRetryTimeout is different from the http client timeout which controls the timeout for a single HTTP request.
 	// Required. Recommend to set a longer timeout period.
